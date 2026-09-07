@@ -2,6 +2,8 @@
 
 A lightweight, dependency-free portfolio designed for GitHub Pages.
 
+https://thomasnimmi29.github.io/portfolio/
+
 ## Portfolio positioning
 
 This portfolio intentionally presents professional work as contribution-focused case studies.
