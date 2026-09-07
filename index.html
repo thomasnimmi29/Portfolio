@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Nimmi Thomas — Lead Frontend Engineer specializing in React, accessible UI architecture, reusable component systems, performance, and AI-assisted developer tooling."
+    />
+    <meta name="theme-color" content="#081426" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Nimmi Thomas | Frontend Platform & Accessibility Engineer</title>
+    <style>
+      :root {
+        --bg: #07111f;
+        --bg-2: #0b1728;
+        --panel: #0f1e32;
+        --panel-2: #12243b;
+        --text: #f7f9fc;
+        --muted: #adbbcf;
+        --line: #243b57;
+        --accent: #63a7ff;
+        --accent-2: #9cc9ff;
+        --good: #79d7b1;
+        --max: 1180px;
+        --radius: 18px;
+        --shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background:
+          radial-gradient(
+            circle at 85% 5%,
+            rgba(99, 167, 255, 0.12),
+            transparent 26rem
+          ),
+          linear-gradient(180deg, var(--bg), #091523 48%, #07111f);
+        color: var(--text);
+        font-family:
+          Inter,
+          ui-sans-serif,
+          system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        line-height: 1.6;
+      }
+
+      a {
+        color: inherit;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--accent-2);
+        outline-offset: 4px;
+        border-radius: 6px;
+      }
+
+      .skip-link {
+        position: absolute;
+        left: -999px;
+        top: 0;
+        background: white;
+        color: #00152d;
+        padding: 0.8rem 1rem;
+        z-index: 100;
+      }
+      .skip-link:focus {
+        left: 1rem;
+        top: 1rem;
+      }
+
+      .wrap {
+        width: min(calc(100% - 2rem), var(--max));
+        margin-inline: auto;
+      }
+
+      nav {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        -webkit-backdrop-filter: blur(14px);
+        backdrop-filter: blur(14px);
+        background: rgba(7, 17, 31, 0.82);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .nav-inner {
+        min-height: 70px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .brand {
+        font-weight: 800;
+        text-decoration: none;
+        letter-spacing: -0.02em;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 1.1rem;
+        flex-wrap: wrap;
+      }
+      .nav-links a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+      .nav-links a:hover {
+        color: white;
+      }
+
+      .hero {
+        padding: 7rem 0 5rem;
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 3rem;
+        align-items: center;
+      }
+      .eyebrow {
+        color: var(--accent-2);
+        font-size: 0.82rem;
+        font-weight: 800;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        margin: 0 0 1rem;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(2.8rem, 7vw, 5.8rem);
+        line-height: 0.98;
+        letter-spacing: -0.055em;
+        max-width: 900px;
+      }
+      .hero .lead {
+        color: var(--muted);
+        max-width: 760px;
+        font-size: clamp(1.05rem, 2vw, 1.25rem);
+        margin: 1.6rem 0 0;
+      }
+      .actions {
+        display: flex;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+      }
+      .actions-center {
+        justify-content: center;
+      }
+      .actions-center a.btn.btn-secondary {
+        min-width: 200px;
+      }
+      .actions-center a.btn.btn-secondary:hover,
+      .actions-center a.btn.btn-secondary:focus-visible,
+      .actions-center a.btn.btn-secondary:active {
+        background: var(--line);
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 48px;
+        padding: 0.75rem 1.1rem;
+        border-radius: 10px;
+        text-decoration: none;
+        font-weight: 750;
+        border: 1px solid var(--line);
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #04111f;
+        border-color: transparent;
+      }
+      .btn-secondary {
+        background: rgba(255, 255, 255, 0.03);
+      }
+      .social-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.65rem;
+        line-height: 1;
+      }
+      .linkedin-badge {
+        width: 1.8rem;
+        height: 1.8rem;
+        min-width: 1.8rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.45rem;
+        background: #0a66c2;
+        color: #ffffff;
+        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+      }
+      .linkedin-badge svg {
+        width: 1.05rem;
+        height: 1.05rem;
+        display: block;
+      }
+      .nav-links .social-link,
+      .btn.btn-secondary.social-link {
+        color: #f3f7ff;
+        font-weight: 700;
+      }
+      .nav-links .social-link:hover,
+      .nav-links .social-link:focus-visible,
+      .btn.btn-secondary.social-link:hover,
+      .btn.btn-secondary.social-link:focus-visible {
+        color: #ffffff;
+      }
+
+      .hero-card {
+        background: linear-gradient(
+          145deg,
+          rgba(99, 167, 255, 0.13),
+          rgba(255, 255, 255, 0.035)
+        );
+        border: 1px solid var(--line);
+        border-radius: 26px;
+        padding: 1.5rem;
+        box-shadow: var(--shadow);
+      }
+      .hero-card h2 {
+        margin: 0 0 0.8rem;
+        font-size: 1.1rem;
+      }
+      .hero-card ul {
+        padding-left: 1.2rem;
+        margin: 0;
+        color: var(--muted);
+      }
+      .hero-card li + li {
+        margin-top: 0.55rem;
+      }
+
+      section {
+        padding: 4.7rem 0;
+      }
+      .section-head {
+        max-width: 760px;
+        margin-bottom: 2rem;
+      }
+      .section-head h2 {
+        margin: 0.2rem 0 0.7rem;
+        font-size: clamp(2rem, 4vw, 3.3rem);
+        letter-spacing: -0.04em;
+        line-height: 1.05;
+      }
+      .section-head p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .metrics {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+      .metric,
+      .card {
+        background: rgba(15, 30, 50, 0.78);
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        padding: 1.35rem;
+      }
+      .metric strong {
+        display: block;
+        font-size: 2rem;
+        line-height: 1;
+        margin-bottom: 0.55rem;
+        color: white;
+      }
+      .metric span {
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+      .card h3 {
+        margin: 0 0 0.55rem;
+        font-size: 1.28rem;
+      }
+      .card p {
+        margin: 0;
+        color: var(--muted);
+      }
+      .card .label {
+        display: inline-block;
+        margin-bottom: 0.9rem;
+        color: var(--good);
+        font-size: 0.78rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+      }
+      .tags {
+        display: flex;
+        gap: 0.45rem;
+        flex-wrap: wrap;
+        margin-top: 1.1rem;
+      }
+      .tag {
+        border: 1px solid var(--line);
+        background: rgba(255, 255, 255, 0.025);
+        color: #cbd7e8;
+        border-radius: 999px;
+        padding: 0.35rem 0.62rem;
+        font-size: 0.78rem;
+      }
+
+      .work-note {
+        margin: 1.2rem 0 0;
+        color: #c5d2e3;
+        border-left: 3px solid var(--accent);
+        padding: 0.85rem 1rem;
+        background: rgba(99, 167, 255, 0.06);
+        border-radius: 0 10px 10px 0;
+      }
+
+      .timeline {
+        display: grid;
+        gap: 1rem;
+      }
+      .role {
+        display: grid;
+        grid-template-columns: 190px 1fr;
+        gap: 1.3rem;
+        border-top: 1px solid var(--line);
+        padding-top: 1.4rem;
+      }
+      .role:first-child {
+        border-top: 0;
+        padding-top: 0;
+      }
+      .role .when {
+        color: var(--accent-2);
+        font-weight: 700;
+      }
+      .role h3 {
+        margin: 0 0 0.3rem;
+      }
+      .role p {
+        color: var(--muted);
+        margin: 0;
+      }
+
+      .skills {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+      .skills .card ul {
+        color: var(--muted);
+        padding-left: 1.15rem;
+        margin-bottom: 0;
+      }
+
+      .contact {
+        text-align: center;
+        padding: 5.8rem 1.5rem;
+        border: 1px solid var(--line);
+        background: linear-gradient(
+          135deg,
+          rgba(99, 167, 255, 0.12),
+          rgba(15, 30, 50, 0.8)
+        );
+        border-radius: 26px;
+      }
+      .contact h2 {
+        font-size: clamp(2.1rem, 5vw, 4rem);
+        margin: 0 0 0.7rem;
+        letter-spacing: -0.04em;
+      }
+      .contact p {
+        color: var(--muted);
+        max-width: 700px;
+        margin: 0 auto;
+      }
+
+      footer {
+        padding: 2.5rem 0;
+        color: #8091a9;
+        font-size: 0.88rem;
+      }
+
+      @media (max-width: 850px) {
+        .hero {
+          grid-template-columns: 1fr;
+          padding-top: 4.5rem;
+        }
+        .metrics {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .grid,
+        .skills {
+          grid-template-columns: 1fr;
+        }
+        .role {
+          grid-template-columns: 1fr;
+          gap: 0.25rem;
+        }
+      }
+      @media (max-width: 620px) {
+        .nav-inner {
+          align-items: flex-start;
+          padding: 0.8rem 0;
+        }
+        .nav-links {
+          justify-content: flex-end;
+          gap: 0.7rem;
+        }
+        .nav-links a:nth-child(2),
+        .nav-links a:nth-child(3) {
+          display: none;
+        }
+        .hero {
+          padding-top: 3.5rem;
+        }
+        .metrics {
+          grid-template-columns: 1fr;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#main">Skip to main content</a>
+
+    <nav aria-label="Primary navigation">
+      <div class="wrap nav-inner">
+        <a class="brand" href="#top">Nimmi Thomas</a>
+        <div class="nav-links">
+          <a href="#work">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="#skills">Skills</a>
+          <a
+            class="social-link"
+            href="https://www.linkedin.com/in/nimmithomas/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+          >
+            <span class="linkedin-badge" aria-hidden="true">
+              <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                <path
+                  fill="currentColor"
+                  d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.4a1.56 1.56 0 0 1 0 3.1ZM5.5 9.8h2.88v8.7H5.5zm5.1 0h2.76v1.18h.04c.38-.72 1.32-1.48 2.72-1.48 2.9 0 3.44 1.9 3.44 4.38v4.62h-2.88v-4.34c0-1.04-.02-2.37-1.45-2.37-1.46 0-1.68 1.13-1.68 2.3v4.41H10.6z"
+                />
+              </svg>
+            </span>
+            <span>LinkedIn</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+
+    <main id="main">
+      <header class="wrap hero" id="top">
+        <div>
+          <p class="eyebrow">
+            Frontend Platform · Design Systems · Accessibility
+          </p>
+          <h1>I build scalable, accessible UI foundations.</h1>
+          <p class="lead">
+            Lead Frontend Engineer with 15+ years of experience delivering
+            enterprise web applications. I specialize in React, reusable
+            component architecture, accessibility, performance, frontend
+            quality, and developer workflows that help teams ship with greater
+            consistency and confidence.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#work"
+              >Explore my engineering work</a
+            >
+          </div>
+        </div>
+
+        <aside class="hero-card" aria-label="Current focus">
+          <h2>What I bring to a frontend platform team</h2>
+          <ul>
+            <li>Reusable React and TypeScript component architecture</li>
+            <li>Accessibility-first UI engineering and WCAG expertise</li>
+            <li>
+              Frontend performance, maintainability, and quality practices
+            </li>
+            <li>Cross-functional technical leadership and mentoring</li>
+            <li>AI-assisted developer tooling and workflow automation</li>
+          </ul>
+        </aside>
+      </header>
+
+      <section aria-labelledby="impact-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Selected impact</p>
+            <h2 id="impact-title">
+              Engineering outcomes, not just shipped pages.
+            </h2>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <strong>50–70%</strong
+              ><span
+                >estimated reduction in accessibility-related issues through
+                AI-assisted validation</span
+              >
+            </div>
+            <div class="metric">
+              <strong>~75%</strong
+              ><span
+                >reduction in feature-migration effort through PR Porter
+                automation</span
+              >
+            </div>
+            <div class="metric">
+              <strong>~2 weeks</strong
+              ><span>developer onboarding reduced from roughly 4–6 weeks</span>
+            </div>
+            <div class="metric">
+              <strong>20+</strong
+              ><span>onsite and offshore engineers mentored</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="work" aria-labelledby="work-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Selected engineering work</p>
+            <h2 id="work-title">
+              Platform thinking across UI architecture, accessibility, and
+              developer experience.
+            </h2>
+            <p>
+              These are contribution-focused case summaries from professional
+              team environments. They describe the areas I personally led,
+              designed, implemented, or helped improve—not ownership of an
+              entire client product.
+            </p>
+          </div>
+
+          <div class="grid">
+            <article class="card">
+              <span class="label">Frontend platform architecture</span>
+              <h3>Reusable component systems for enterprise applications</h3>
+              <p>
+                Designed and implemented reusable frontend frameworks, shared
+                component libraries, responsive UI patterns, and enterprise
+                integration approaches across React and AEM-based applications.
+                Focused on consistency, maintainability, accessibility, and
+                delivery efficiency across multiple teams and products.
+              </p>
+              <div class="tags">
+                <span class="tag">React</span><span class="tag">TypeScript</span
+                ><span class="tag">JavaScript</span> <span class="tag">AEM</span
+                ><span class="tag">Component Architecture</span
+                ><span class="tag">Responsive UI</span>
+              </div>
+            </article>
+
+            <article class="card">
+              <span class="label">Accessibility systems</span>
+              <h3>Accessibility shifted earlier into development</h3>
+              <p>
+                Led accessibility initiatives spanning WCAG, ADA, and Section
+                508, including developer guidance, reviews, training, and
+                AI-assisted validation. Introduced an Accessibility Agent
+                workflow that helped teams identify issues earlier and
+                contributed to a substantial reduction in accessibility defects.
+              </p>
+              <div class="tags">
+                <span class="tag">WCAG 2.2</span><span class="tag">ADA</span
+                ><span class="tag">Section 508</span>
+                <span class="tag">NVDA</span><span class="tag">JAWS</span
+                ><span class="tag">Inclusive Design</span>
+              </div>
+            </article>
+
+            <article class="card">
+              <span class="label">UI quality & performance</span>
+              <h3>Scalable React delivery across multi-tenant platforms</h3>
+              <p>
+                Led frontend engineering initiatives for healthcare enrollment
+                platforms supporting 16+ tenant experiences. Improved
+                performance and maintainability through component reuse,
+                state-management improvements, code splitting, dependency
+                upgrades, security remediation, and release-readiness practices.
+              </p>
+              <div class="tags">
+                <span class="tag">React</span
+                ><span class="tag">Node.js SSR</span
+                ><span class="tag">Redux</span>
+                <span class="tag">Performance</span><span class="tag">Jest</span
+                ><span class="tag">CI/CD</span>
+              </div>
+            </article>
+
+            <article class="card">
+              <span class="label">Developer experience</span>
+              <h3>AI-assisted tooling for quality and delivery</h3>
+              <p>
+                Developed and introduced engineering workflows including
+                Accessibility Agent, PR Review Agent, PR Porter Agent, and
+                Spec-Driven Development practices. These initiatives supported
+                faster onboarding, repeatable quality checks, improved migration
+                efficiency, and stronger engineering consistency.
+              </p>
+              <div class="tags">
+                <span class="tag">GitHub Copilot</span
+                ><span class="tag">VS Code Agents</span>
+                <span class="tag">Developer Tooling</span
+                ><span class="tag">SDD</span><span class="tag">Automation</span>
+              </div>
+            </article>
+          </div>
+
+          <p class="work-note">
+            <strong>Professional work note:</strong> Client and employer work
+            shown here was completed within cross-functional teams. This
+            portfolio focuses only on my individual engineering contributions
+            and intentionally excludes proprietary source code, confidential
+            architecture, internal screenshots, and client-owned materials.
+          </p>
+        </div>
+      </section>
+
+      <section id="experience" aria-labelledby="experience-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Experience</p>
+            <h2 id="experience-title">
+              Enterprise frontend engineering and technical leadership.
+            </h2>
+          </div>
+
+          <div class="timeline">
+            <article class="role">
+              <div class="when">2022 — Present</div>
+              <div>
+                <h3>Senior Frontend Engineer · Maximus</h3>
+                <p>
+                  Lead frontend initiatives for enterprise healthcare enrollment
+                  applications using React, Node.js SSR, AEM, APIs, cloud
+                  tooling, accessibility practices, CI/CD, and AI-assisted
+                  developer workflows. Conduct design and code reviews, mentor
+                  engineers, and collaborate with architects, QA, product,
+                  business stakeholders, and engineering leadership.
+                </p>
+              </div>
+            </article>
+
+            <article class="role">
+              <div class="when">2016 — 2022</div>
+              <div>
+                <h3>Lead Frontend Developer · MentorUS Global LLC</h3>
+                <p>
+                  Served as frontend technical lead across government and
+                  healthcare client engagements. Built React, Angular,
+                  JavaScript, HTML, and CSS applications; developed reusable
+                  component libraries and frontend standards; led accessibility
+                  initiatives; and supported solution design and delivery.
+                </p>
+              </div>
+            </article>
+
+            <article class="role">
+              <div class="when">2009 — 2015</div>
+              <div>
+                <h3>Frontend Engineer · Earlier Career</h3>
+                <p>
+                  Built responsive web applications, portals, and commerce
+                  experiences across healthcare, staffing, recruiting,
+                  government, and commercial domains, developing a strong
+                  foundation in frontend engineering, UX, responsive design,
+                  APIs, and accessibility.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="skills" aria-labelledby="skills-title">
+        <div class="wrap">
+          <div class="section-head">
+            <p class="eyebrow">Technical strengths</p>
+            <h2 id="skills-title">Built for frontend platform work.</h2>
+          </div>
+
+          <div class="skills">
+            <article class="card">
+              <h3>UI Engineering</h3>
+              <ul>
+                <li>React, JavaScript, TypeScript, HTML5, CSS3</li>
+                <li>Redux and component-based architecture</li>
+                <li>Responsive design and reusable UI patterns</li>
+                <li>Node.js and server-side rendering</li>
+                <li>AEM Sites and AEM Headless</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>Quality & Accessibility</h3>
+              <ul>
+                <li>WCAG 2.2, ADA, Section 508</li>
+                <li>NVDA and JAWS</li>
+                <li>Jest and frontend quality practices</li>
+                <li>Performance optimization</li>
+                <li>Secure coding and vulnerability remediation</li>
+              </ul>
+            </article>
+
+            <article class="card">
+              <h3>Platform & Leadership</h3>
+              <ul>
+                <li>Shared component libraries and UI standards</li>
+                <li>AWS, Azure, Azure DevOps, Jenkins, CI/CD</li>
+                <li>Technical design and code reviews</li>
+                <li>Mentoring distributed engineering teams</li>
+                <li>GitHub Copilot and AI-assisted workflows</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <div class="wrap">
+          <div class="contact">
+            <p class="eyebrow">Let's connect</p>
+            <h2>Building better UI foundations.</h2>
+            <p>
+              I'm interested in frontend platform and design-system work where
+              accessibility, reusable architecture, developer experience, and
+              engineering quality are treated as product capabilities.
+            </p>
+            <div class="actions actions-center">
+              <a
+                class="btn btn-secondary social-link"
+                href="https://www.linkedin.com/in/nimmithomas/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+              >
+                <span class="linkedin-badge" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      fill="currentColor"
+                      d="M6.94 8.5A1.56 1.56 0 1 1 6.94 5.4a1.56 1.56 0 0 1 0 3.1ZM5.5 9.8h2.88v8.7H5.5zm5.1 0h2.76v1.18h.04c.38-.72 1.32-1.48 2.72-1.48 2.9 0 3.44 1.9 3.44 4.38v4.62h-2.88v-4.34c0-1.04-.02-2.37-1.45-2.37-1.46 0-1.68 1.13-1.68 2.3v4.41H10.6z"
+                    />
+                  </svg>
+                </span>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap">
+        © <span id="year"></span> Nimmi Thomas. Built with semantic HTML and
+        CSS, with accessibility in mind.
+      </div>
+    </footer>
+
+    <script>
+      document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+  </body>
+</html>
